@@ -1,0 +1,39 @@
+<?php
+
+$title = 'Edit Category';
+$this->headTitle($title);
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+/** @var \Zend\Form\Form $title */
+$title = $this->form->get('category')->get('title');
+$title->setAttribute('class', 'form-control');
+$title->setAttribute('placeholder', 'Category title');
+
+
+/** @var \Zend\Form\Form $submit */
+$submit = $this->form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$this->form->setAttribute(
+    'action', $this->url(
+    'category', [
+        'action' => 'edit',
+        'id'     => $this->id,
+    ]
+)
+);
+$this->form->prepare();
+
+echo $this->form()->openTag($this->form);
+?>
+    <div class="form-group">
+        <?= $this->formLabel($title) ?>
+        <?= $this->formElement($title) ?>
+        <?= $this->formElementErrors()->render($title, ['class' => 'help-block']) ?>
+    </div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('category')->get('id'));
+echo $this->form()->closeTag();

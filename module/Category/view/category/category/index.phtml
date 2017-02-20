@@ -1,0 +1,27 @@
+<?php
+$title = 'My Categories';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('category', ['action' => 'add']) ?>">Add new Category</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($this->categories as $category) : ?>
+        <?php /** @var \Category\Entity\Category $category */ ?>
+        <tr>
+            <td><?= $this->escapeHtml($category->getId()) ?></td>
+            <td><?= $this->escapeHtml($category->getTitle()) ?></td>
+            <td>
+                <a href="<?= $this->url('category', ['action' => 'edit', 'id' => $category->getId()]) ?>">Edit</a>
+                <a href="<?= $this->url('category', ['action' => 'delete', 'id' => $category->getId()]) ?>">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>

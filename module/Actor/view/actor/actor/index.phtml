@@ -1,0 +1,29 @@
+<?php
+$title = 'My Actors';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('actor', ['action' => 'add']) ?>">Add new film</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Sexe</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($this->films as $film) : ?>
+        <?php /** @var \Actor\Entity\Actor $actor */ ?>
+        <tr>
+            <td><?= $this->escapeHtml($actor->getFirstName()) ?></td>
+            <td><?= $this->escapeHtml($actor->getLastName()) ?></td>
+            <td><?= $this->escapeHtml($actor->getSex()) ?></td>
+            <td>
+                <a href="<?= $this->url('actor', ['action' => 'edit', 'id' => $film->getId()]) ?>">Edit</a>
+                <a href="<?= $this->url('actor', ['action' => 'delete', 'id' => $film->getId()]) ?>">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>

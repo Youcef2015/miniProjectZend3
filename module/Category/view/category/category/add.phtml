@@ -1,0 +1,37 @@
+<?php
+$title = 'Add new Category';
+$this->headTitle($title);
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+    <p>
+        <a href="<?= $this->url('category', ['action' => 'add']) ?>">Add new Category</a>
+    </p>
+<?php
+// This provides a default CSS class and placeholder text for the title element:
+/** @var \Zend\Form\Form $title */
+$title = $this->form->get('category')->get('title');
+$title->setAttribute('class', 'form-control');
+$title->setAttribute('placeholder', 'Category titre');
+
+
+// This provides CSS classes for the submit button:
+/** @var \Zend\Form\Form $submit */
+$submit = $this->form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$this->form->setAttribute('action', $this->url('category', ['action' => 'add']));
+$this->form->prepare();
+
+echo $this->form()->openTag($this->form);
+?>
+<?php // Wrap the elements in divs marked as form groups, and render the
+// label, element, and errors separately within ?>
+    <div class="form-group">
+        <?= $this->formLabel($title) ?>
+        <?= $this->formElement($title) ?>
+        <?= $this->formElementErrors()->render($title, ['class' => 'help-block']) ?>
+    </div>
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($this->form->get('category')->get('id'));
+echo $this->form()->closeTag();
