@@ -76,8 +76,14 @@ return [
     ],
 
     'view_manager' => [
+        'template_map' => [
+            'actor/actor/index' => __DIR__ . '/../view/actor/actor/index.phtml',
+            'actor/actor/add' => __DIR__ . '/../view/actor/actor/add.phtml',
+            'actor/actor/edit' => __DIR__ . '/../view/actor/actor/edit.phtml',
+            'actor/actor/delete' => __DIR__ . '/../view/actor/actor/delete.phtml',
+        ],
         'template_path_stack' => [
-            'album' => __DIR__ . '/../view',
+            'actor' => __DIR__ . '/../view',
         ],
     ],
 ];

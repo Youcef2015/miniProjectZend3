@@ -57,6 +57,7 @@ class FilmService implements FilmServiceInterface
 
     public function edit(Film $film)
     {
+        $film->setDtRelease(new \DateTime());
         $this->entityManager->flush($film);
 
         return $film;

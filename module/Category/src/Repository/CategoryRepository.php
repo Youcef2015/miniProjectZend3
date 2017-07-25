@@ -16,7 +16,7 @@ use Doctrine\ORM\EntityRepository;
 class CategoryRepository extends EntityRepository
 {
     /**
-     * @return Category[
+     * @return Category[]
      */
     public function getCategories()
     {

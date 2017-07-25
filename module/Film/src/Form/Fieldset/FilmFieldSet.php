@@ -10,6 +10,7 @@ declare(strict_types = 1);
 namespace Film\Form\Fieldset;
 
 
+use Actor\Entity\Actor;
 use Category\Entity\Category;
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Form\Element\ObjectSelect;
@@ -90,15 +91,6 @@ class FilmFieldSet extends Fieldset implements InputFilterProviderInterface
                 ],
             ]
         );
-        $this->add(
-            [
-                'name'    => 'date_release',
-                'type'    => \ZfSnapJquery\Form\Element\Datepicker::class,
-                'options' => [
-                    'label' => 'Date de sortie',
-                ],
-            ]
-        );
 
         $this->add(
             [
@@ -112,6 +104,24 @@ class FilmFieldSet extends Fieldset implements InputFilterProviderInterface
                     'property' => 'title',
                     'find_method'        => [
                         'name'   => 'getCategories',
+                    ],
+                    'display_empty_item' => true
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'    => 'actor',
+                'type'    => ObjectSelect::class,
+                'options' => [
+                    'label' => 'Acteurs',
+                    'target_class'   => Actor::class,
+                    'object_manager' => $this->objectManger,
+                    'is_method'      => true,
+                    'property' => 'lastName',
+                    'find_method'        => [
+                        'name'   => 'getActors',
                     ],
                     'display_empty_item' => true
                 ],

@@ -6,7 +6,7 @@ $this->headTitle($title);
     <h1><?= $this->escapeHtml($title) ?></h1>
 <?php
 /** @var \Zend\Form\Form $title */
-$title = $this->form->get('category')->get('title');
+$title = $this->form->get('film')->get('title');
 $title->setAttribute('class', 'form-control');
 $title->setAttribute('placeholder', 'Category title');
 
@@ -31,15 +31,19 @@ $director->setAttribute('placeholder', 'Film Réalisateur');
 
 // This provides a default CSS class and placeholder text for the artist element:
 /** @var \Zend\Form\Form $dateRelease */
-$dateRelease = $this->form->get('film')->get('date_release');
+$dateRelease = $this->form->get('film')->get('dtRelease');
 $dateRelease->setAttribute('class', 'form-control');
-$dateRelease->setAttribute('placeholder', 'Film Réalisateur');
+$dateRelease->setAttribute('placeholder', 'Date de sortie');
 
 /** @var \Zend\Form\Form $category */
 $category = $this->form->get('film')->get('category');
 $category->setAttribute('class', 'form-control');
 $category->setAttribute('placeholder', 'Film Categories');
 
+/** @var \Zend\Form\Form $actor */
+$actor = $this->form->get('film')->get('actor');
+$actor->setAttribute('class', 'form-control');
+$actor->setAttribute('placeholder', 'acteurs');
 
 /** @var \Zend\Form\Form $submit */
 $submit = $this->form->get('submit');
@@ -47,7 +51,7 @@ $submit->setAttribute('class', 'btn btn-primary');
 
 $this->form->setAttribute(
     'action', $this->url(
-    'category', [
+    'film', [
         'action' => 'edit',
         'id'     => $this->id,
     ]
@@ -81,16 +85,18 @@ echo $this->form()->openTag($this->form);
         <?= $this->formElementErrors()->render($director, ['class' => 'help-block']) ?>
     </div>
 
-    <div class="form-group">
-        <?= $this->formLabel($dateRelease) ?>
-        <?= $this->formElement($dateRelease) ?>
-        <?= $this->formElementErrors()->render($dateRelease, ['class' => 'help-block']) ?>
-    </div>
+
 
     <div class="form-group">
         <?= $this->formLabel($category) ?>
         <?= $this->formElement($category) ?>
         <?= $this->formElementErrors()->render($category, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($actor) ?>
+        <?= $this->formElement($actor) ?>
+        <?= $this->formElementErrors()->render($actor, ['class' => 'help-block']) ?>
     </div>
 
 <?php

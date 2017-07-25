@@ -80,9 +80,10 @@ return [
             'film/film/index' => __DIR__ . '/../view/film/film/index.phtml',
             'film/film/add' => __DIR__ . '/../view/film/film/add.phtml',
             'film/film/edit' => __DIR__ . '/../view/film/film/edit.phtml',
+            'film/film/delete' => __DIR__ . '/../view/film/film/delete.phtml',
         ],
         'template_path_stack' => [
-            'album' => __DIR__ . '/../view',
+            'film' => __DIR__ . '/../view',
         ],
     ],
 ];

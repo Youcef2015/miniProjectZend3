@@ -14,5 +14,13 @@ use Doctrine\ORM\EntityRepository;
 
 class ActorRepository extends EntityRepository
 {
-
+    public function getActors()
+    {
+        /**
+         * @return Actor[]
+         */
+        $qb = $this->createQueryBuilder('a')
+                   ->addOrderBy('a.lastName', 'ASC');
+        return $qb->getQuery()->getResult();
+    }
 }

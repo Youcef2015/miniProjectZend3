@@ -41,7 +41,7 @@ class AddFilmForm extends Form
                     'genre',
                     'title',
                     'director',
-                    'date_release'
+                    'category'
                 ]
             ]
         );

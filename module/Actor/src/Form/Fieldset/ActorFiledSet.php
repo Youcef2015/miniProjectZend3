@@ -11,12 +11,18 @@ namespace Actor\Form\FieldSet;
 
 
 use Actor\Entity\Actor;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
+use DoctrineModule\Form\Element\ObjectSelect;
+use Film\Entity\Film;
 use Zend\Filter\StringToUpper;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\Filter\ToInt;
+use Zend\Form\Element\Date;
+use Zend\Form\Element\DateTime;
 use Zend\Form\Element\Hidden;
+use Zend\Form\Element\Select;
 use Zend\Form\Element\Text;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
@@ -36,8 +42,10 @@ class ActorFiledSet extends Fieldset implements InputFilterProviderInterface
 
     public function init()
     {
+
         $this->setHydrator(new DoctrineHydrator($this->objectManager))
              ->setObject(new Actor());
+
 
         $this->add(
             [
@@ -69,6 +77,38 @@ class ActorFiledSet extends Fieldset implements InputFilterProviderInterface
                 'type'    => Text::class,
                 'options' => [
                     'label' => 'Sexe',
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'    => 'sex',
+                'type'    => Select::class,
+                'options' => [
+                    'label' => 'Sexe',
+                    'value_options' => [
+                        '1' => 'Monsieur',
+                        '2' => 'Madame',
+                    ]
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'    => 'film',
+                'type'    => ObjectSelect::class,
+                'options' => [
+                    'label' => 'Films',
+                    'target_class'   => Film::class,
+                    'object_manager' => $this->objectManager,
+                    'is_method'      => true,
+                    'property' => 'title',
+                    'find_method'        => [
+                        'name'   => 'getFilms',
+                    ],
+                    'display_empty_item' => true
                 ],
             ]
         );

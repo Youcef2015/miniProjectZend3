@@ -86,7 +86,7 @@ class FilmController extends AbstractActionController
                 $film = $this->filmForm->getData();
 
                 $this->filmForm->edit($film);
-                return $this->redirect()->toRoute('album');
+                return $this->redirect()->toRoute('film');
             }
         }
 

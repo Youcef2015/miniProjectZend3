@@ -13,7 +13,7 @@ namespace Actor\Controller;
 use Actor\Form\AddActorForm;
 use Actor\Service\ActorServiceInterface;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Helper\ViewModel;
+use Zend\View\Model\ViewModel;
 
 class ActorController extends AbstractActionController
 {
@@ -43,6 +43,27 @@ class ActorController extends AbstractActionController
 
     public function addAction()
     {
+        /**
+         * @var \Zend\Http\Request $request
+         */
+        $request = $this->getRequest();
 
+        if ($request->isPost()) {
+            $this->actorForm->setData($request->getPost());
+
+            if ($this->actorForm->isValid()) {
+
+                $actor = $this->actorForm->getData();
+                $this->actorService->create($actor);
+
+                return $this->redirect()->toRoute('actor');
+            }
+        }
+
+        return new ViewModel(
+            [
+                'form' => $this->actorForm
+            ]
+        );
     }
 }

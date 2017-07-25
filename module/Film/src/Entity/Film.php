@@ -11,6 +11,7 @@ namespace Film\Entity;
 
 use Actor\Entity\Actor;
 use Category\Entity\Category;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,11 +61,6 @@ class Film
     public $director;
 
     /**
-     * @ORM\Column(type="datetime", name="date_release")
-     */
-    private $dtRelease;
-
-    /**
      * @ORM\Column(type="datetime", name="date_creation")
      */
     private $dtCreation;
@@ -84,12 +80,18 @@ class Film
     /**
      * @ORM\ManyToMany(targetEntity="Actor\Entity\Actor")
      * @ORM\JoinTable(name="Film_Actor",
-     *      joinColumns={@ORM\JoinColumn(name="film_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id", unique=true)}
+     *      joinColumns={@ORM\JoinColumn(name="film_id", referencedColumnName="id", nullable=true)},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id", unique=true, nullable=true)}
      *      )
      */
 
     private $actors;
+
+    public function __construct()
+    {
+        $this->actors = new ArrayCollection();
+        $this->dtCreation = new \DateTime();
+    }
 
     /**
      * @return int
@@ -194,26 +196,6 @@ class Film
     /**
      * @return \DateTime
      */
-    public function getDtRelease()
-    {
-        return $this->dtRelease;
-    }
-
-    /**
-     * @param \DateTime $dtRelease
-     *
-     * @return $this
-     */
-    public function setDtRelease(\DateTime $dtRelease)
-    {
-        $this->dtRelease = $dtRelease;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
     public function getDtCreation()
     {
         return $this->dtCreation;
@@ -272,7 +254,7 @@ class Film
     }
 
     /**
-     * @return Actor[]
+     * @return ArrayCollection
      */
     public function getActors()
     {
@@ -280,11 +262,11 @@ class Film
     }
 
     /**
-     * @param Actor $actors
+     * @param ArrayCollection $actors
      *
      * @return $this
      */
-    public function setActors(Actor $actors)
+    public function setActors(ArrayCollection $actors)
     {
         $this->actors = $actors;
 

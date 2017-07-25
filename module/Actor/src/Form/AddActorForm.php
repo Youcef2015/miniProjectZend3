@@ -35,11 +35,12 @@ class AddActorForm extends Form
 
         $this->setValidationGroup(
             [
-                'blog' => [
+                'actor' => [
                     'id',
-                    'title',
-                    'text',
-                    'album',
+                    'firstName',
+                    'lastName',
+                    'sex',
+                    'film',
                 ]
             ]
         );

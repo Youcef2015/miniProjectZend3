@@ -20,8 +20,8 @@ $this->headTitle($title);
             <td><?= $this->escapeHtml($film->getTitle()) ?></td>
             <td><?= $this->escapeHtml($film->getGenre()) ?></td>
             <td>
-                <a href="<?= $this->url('album', ['action' => 'edit', 'id' => $film->getId()]) ?>">Edit</a>
-                <a href="<?= $this->url('album', ['action' => 'delete', 'id' => $film->getId()]) ?>">Delete</a>
+                <a href="<?= $this->url('film', ['action' => 'edit', 'id' => $film->getId()]) ?>">Edit</a>
+                <a href="<?= $this->url('film', ['action' => 'delete', 'id' => $film->getId()]) ?>">Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>

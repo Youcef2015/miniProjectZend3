@@ -17,7 +17,6 @@ return [
     'Zend\Validator',
     'DoctrineModule',
     'DoctrineORMModule',
-    'ZendDeveloperTools',
     'Application',
     'Film',
     'Category',

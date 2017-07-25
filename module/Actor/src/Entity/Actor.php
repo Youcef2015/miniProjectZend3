@@ -10,6 +10,7 @@ declare(strict_types = 1);
 namespace Actor\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Film\Entity\Film;
 
@@ -45,29 +46,23 @@ class Actor
      */
     public $lastName;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_birth", type="datetime")
-     */
-    public $dateBirth;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="sex", type="string", length=100)
+     * @ORM\Column(name="sex", type="integer", length=100)
      */
     public $sex;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Film\Entity\Film")
-     * @ORM\JoinTable(name="Film_Actor",
-     *      joinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="film_id", referencedColumnName="id", unique=true)}
-     *      )
+     * @ORM\ManyToMany(targetEntity="Film\Entity\Film", cascade={"persist", "remove"})
      */
+    public $film;
 
-    public $films;
+    public function __construct()
+    {
+        $this->film = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -130,27 +125,7 @@ class Actor
     }
 
     /**
-     * @return \DateTime
-     */
-    public function getDateBirth()
-    {
-        return $this->dateBirth;
-    }
-
-    /**
-     * @param \DateTime $dateBirth
-     *
-     * @return $this
-     */
-    public function setDateBirth(\DateTime $dateBirth)
-    {
-        $this->dateBirth = $dateBirth;
-
-        return $this;
-    }
-
-    /**
-     * @return string
+     * @return int
      */
     public function getSex()
     {
@@ -158,11 +133,11 @@ class Actor
     }
 
     /**
-     * @param string $sex
+     * @param int $sex
      *
      * @return $this
      */
-    public function setSex(string $sex)
+    public function setSex(int $sex)
     {
         $this->sex = $sex;
 
@@ -170,21 +145,28 @@ class Actor
     }
 
     /**
-     * @return Film
+     * @return ArrayCollection
      */
-    public function getFilms()
+    public function getFilm()
     {
-        return $this->films;
+        return $this->film;
     }
 
     /**
-     * @param Film $films
+     * @param ArrayCollection $films
      *
      * @return $this
      */
-    public function setFilms(Film $films)
+    public function setFilm(ArrayCollection $films)
     {
-        $this->films = $films;
+        $this->film = $films;
+
+        return $this;
+    }
+
+    public function addFilm(Film $film)
+    {
+        $this->film->add($film);
 
         return $this;
     }

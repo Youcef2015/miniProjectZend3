@@ -11,8 +11,17 @@ namespace Film\Repository;
 
 
 use Doctrine\ORM\EntityRepository;
+use Film\Entity\Film;
 
 class FilmRepository extends EntityRepository
 {
-
+    public function getFilms()
+    {
+        /**
+         * @return Film[]
+         */
+        $qb = $this->createQueryBuilder('a')
+                   ->addOrderBy('a.title', 'ASC');
+        return $qb->getQuery()->getResult();
+    }
 }

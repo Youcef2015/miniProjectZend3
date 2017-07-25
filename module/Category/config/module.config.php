@@ -76,8 +76,14 @@ return [
     ],
 
     'view_manager' => [
+        'template_map' => [
+            'category/category/index' => __DIR__ . '/../view/category/category/index.phtml',
+            'category/category/add' => __DIR__ . '/../view/category/category/add.phtml',
+            'category/category/edit' => __DIR__ . '/../view/category/category/edit.phtml',
+            'category/category/delete' => __DIR__ . '/../view/category/category/delete.phtml',
+        ],
         'template_path_stack' => [
-            'album' => __DIR__ . '/../view',
+            'category' => __DIR__ . '/../view',
         ],
     ],
 ];

@@ -1,0 +1,74 @@
+<?php
+$title = 'Add new Actor';
+$this->headTitle($title);
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+    <p>
+        <a href="<?= $this->url('actor', ['action' => 'add']) ?>">Add new Actor</a>
+    </p>
+<?php
+// This provides a default CSS class and placeholder text for the title element:
+/** @var \Zend\Form\Form $firstName */
+$firstName = $this->form->get('actor')->get('firstName');
+$firstName->setAttribute('class', 'form-control');
+$firstName->setAttribute('placeholder', 'First Name');
+
+// This provides a default CSS class and placeholder text for the artist element:
+/** @var \Zend\Form\Form $lastName */
+$lastName = $this->form->get('actor')->get('lastName');
+$lastName->setAttribute('class', 'form-control');
+$lastName->setAttribute('placeholder', 'Last Name');
+
+// This provides a default CSS class and placeholder text for the artist element:
+/** @var \Zend\Form\Form $sex */
+$sex = $this->form->get('actor')->get('sex');
+$sex->setAttribute('class', 'form-control');
+$sex->setAttribute('placeholder', 'Sexe :');
+
+// This provides a default CSS class and placeholder text for the artist element:
+/** @var \Zend\Form\Form $film */
+$film = $this->form->get('actor')->get('film');
+$film->setAttribute('class', 'form-control');
+$film->setAttribute('placeholder', 'Date de naissance');
+
+
+// This provides CSS classes for the submit button:
+/** @var \Zend\Form\Form $submit */
+$submit = $this->form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$this->form->setAttribute('action', $this->url('actor', ['action' => 'add']));
+$this->form->prepare();
+
+echo $this->form()->openTag($this->form);
+?>
+<?php // Wrap the elements in divs marked as form groups, and render the
+// label, element, and errors separately within ?>
+    <div class="form-group">
+        <?= $this->formLabel($firstName) ?>
+        <?= $this->formElement($firstName) ?>
+        <?= $this->formElementErrors()->render($firstName, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($lastName) ?>
+        <?= $this->formElement($lastName) ?>
+        <?= $this->formElementErrors()->render($lastName, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($sex) ?>
+        <?= $this->formElement($sex) ?>
+        <?= $this->formElementErrors()->render($sex, ['class' => 'help-block']) ?>
+    </div>
+
+     <div class="form-group">
+            <?= $this->formLabel($film) ?>
+            <?= $this->formElement($film) ?>
+            <?= $this->formElementErrors()->render($film, ['class' => 'help-block']) ?>
+     </div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($this->form->get('actor')->get('id'));
+echo $this->form()->closeTag();
